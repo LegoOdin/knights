@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Prac</title>
+  </head>
+
+  <body>
+
+  </body>
+
+  <script>
+    const ROW_ONE = ["A","B", "C", "D", "E"];
+    const ROW_TWO = ["F", "G", "H", "I", "J"];
+    const ROW_THREE = ["K", "L", "M", "N", "O"];
+    const ROW_FOUR = [ "", "1", "2", "3", ""];
+    const KEYPAD = [ROW_ONE, ROW_TWO, ROW_THREE, ROW_FOUR];
+    const VOWELS = ["A", "E", "I", "O", "U"];
+    let sequence = [];
+    let yPosition;
+    let xPosition;
+    let key;
+
+    function getUserSelection(){
+      let userSelection = window.prompt("Press A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, or 1,2,3: ");
+      for (let y=0; y<5; y++){
+        for (let x=0; x<5; x++){
+          userSelection = userSelection.toUpperCase();
+          console.log(y + " " + x);
+          if (userSelection === KEYPAD[y][x]){
+            console.log(userSelection + " is Correct");
+            const ARRAY_POSITION = [];
+            ARRAY_POSITION[0]=x;
+            ARRAY_POSITION[1]=y;
+            return ARRAY_POSITION;
+          } else {
+            console.log("ERROR - Incorrect Value");
+          }
+        }
+      }
+    }
+    function isVowel(){
+      for (let i=0; i<6; i++){
+        if (VOWELS[i] === KEYPAD[y][x]){
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } 
+    function knightMove1(){
+      yPosition=yPosition+1;
+      xPosition=xPosition+2;
+    }
+
+    function knightMove2(){
+      yPosition=yPosition-1;
+      xPosition=xPosition+2;
+    }
+
+    function knightMove3(){
+      yPosition=yPosition-1;
+      xPosition=xPosition-2;
+    }
+    function knightMove4(){
+      yPosition=yPosition+1;
+      xPosition=xPosition-2;
+    }
+
+    function knightMove5(){
+      yPosition=yPosition+2;
+      xPosition=xPosition+1;
+    }
+
+    function knightMove6(){
+      yPosition=yPosition-2;
+      xPosition=xPosition+1;
+    }
+    function knightMove7(){
+      yPosition=yPosition-2;
+      xPosition=xPosition-1;
+    }
+    function knightMove8(){
+      yPosition=yPosition+2;
+      xPosition=xPosition-1;
+    }
+
+    function KnightGame(){
+      for (let firstTime = 0; firstTime<1; firstTime++){
+        const USER_SELECTION = getUserSelection();
+        console.log(USER_SELECTION);
+        yPosition = USER_SELECTION[0];
+        xPosition = USER_SELECTION[1];
+        console.log(yPosition +" "+ xPosition);
+        knightMove1()
+      }
+
+      for (let i = 0; i<10; i++){
+        if(yPosition==0 && xPosition<2){
+          let tempPosY=yPosition+1;
+          let tempPosX=xPosition+2;
+          for (let i=0; i<6; i++){
+            if (VOWELS[i] ===! KEYPAD[tempPosY][tempPosX]){
+              yPosition=tempPosY;
+              xPosition=tempPosX;
+            } else {
+              yPosition=yPosition+2;
+              xPosition=xPosition+1;
+            }
+          }    
+        } 
+
+        sequence[i]=KEYPAD[yPosition][xPosition];
+      }
+
+
+
+
+
+
+      console.log(sequence);
+    }
+
+    KnightGame()
+  </script> 
+</html>
