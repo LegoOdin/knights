@@ -37,13 +37,18 @@
         }
       }
     }
-    function tooManyVowels(){
-      for (let i=0; i<6; i++){
-        if (VOWELS[i] === KEYPAD[y][x]){
-
-          return true;
+    function countVowels(){
+      let numberOfVowels = 0;
+      console.log("Lets Count Vowels");
+      for (let y=0; y<6; y++){
+        for (let x=0; x<11; x++){
+          if (VOWELS[y] === sequence[x]){
+            numberOfVowels++;
+          }
         }
       }
+        console.log(numberOfVowels);
+        return numberOfVowels;
     } 
     function knightMove1(){
       console.log("Move1");
@@ -141,7 +146,14 @@
         }
         sequence[count]=KEYPAD[yPosition][xPosition];
         count++
-        }  
+        if (count===10){
+          let noVowels=countVowels()
+          if (noVowels>1 && count===10){
+            count=0;
+          }
+        }
+
+      }  
     console.log(sequence);
 
     }
