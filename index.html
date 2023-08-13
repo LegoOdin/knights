@@ -26,12 +26,10 @@
       for (let y=0; y<5; y++){
         for (let x=0; x<5; x++){
           userSelection = userSelection.toUpperCase();
-          console.log(y + " " + x);
-          if (userSelection === KEYPAD[y][x]){
-            console.log(userSelection + " is Correct");
+          if (userSelection == KEYPAD[y][x]){
             const ARRAY_POSITION = [];
-            ARRAY_POSITION[0]=x;
-            ARRAY_POSITION[1]=y;
+            ARRAY_POSITION[0]=y;
+            ARRAY_POSITION[1]=x;
             return ARRAY_POSITION;
           } else {
             console.log("ERROR - Incorrect Value");
@@ -39,88 +37,115 @@
         }
       }
     }
-    function isVowel(){
+    function tooManyVowels(){
       for (let i=0; i<6; i++){
         if (VOWELS[i] === KEYPAD[y][x]){
+
           return true;
-        } else {
-          return false;
         }
       }
     } 
     function knightMove1(){
+      console.log("Move1");
       yPosition=yPosition+1;
       xPosition=xPosition+2;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
-
     function knightMove2(){
+      console.log("Move2");
       yPosition=yPosition-1;
       xPosition=xPosition+2;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
-
     function knightMove3(){
+      console.log("Move3");
       yPosition=yPosition-1;
       xPosition=xPosition-2;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
     function knightMove4(){
+      console.log("Move4");
       yPosition=yPosition+1;
       xPosition=xPosition-2;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
-
     function knightMove5(){
+      console.log("Move5");
       yPosition=yPosition+2;
       xPosition=xPosition+1;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
-
     function knightMove6(){
+      console.log("Move6");
       yPosition=yPosition-2;
       xPosition=xPosition+1;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
     function knightMove7(){
+      console.log("Move7");
       yPosition=yPosition-2;
       xPosition=xPosition-1;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
     function knightMove8(){
+      console.log("Move8");
       yPosition=yPosition+2;
       xPosition=xPosition-1;
+      console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
 
     function KnightGame(){
+      let count = 0;
       for (let firstTime = 0; firstTime<1; firstTime++){
         const USER_SELECTION = getUserSelection();
         console.log(USER_SELECTION);
         yPosition = USER_SELECTION[0];
         xPosition = USER_SELECTION[1];
         console.log(yPosition +" "+ xPosition);
-        knightMove1()
+        console.log("Knight starts at "+KEYPAD[yPosition][xPosition]);
       }
 
-      for (let i = 0; i<10; i++){
-        if(yPosition==0 && xPosition<2){
-          let tempPosY=yPosition+1;
-          let tempPosX=xPosition+2;
-          for (let i=0; i<6; i++){
-            if (VOWELS[i] ===! KEYPAD[tempPosY][tempPosX]){
-              yPosition=tempPosY;
-              xPosition=tempPosX;
-            } else {
-              yPosition=yPosition+2;
-              xPosition=xPosition+1;
-            }
-          }    
-        } 
+      while (count<10){
+        let x = count;
+        if(yPosition<2 && xPosition<3 && x===count){
+          if(Math.floor(Math.random()*(2-1+1))===1){
+            knightMove1()
+        } else {
+            knightMove5()
+        }
+          x++;
+        }
+        if(yPosition<2 && xPosition>2 && x===count){
+          if(Math.floor(Math.random()*(2-1+1))===1){
+            knightMove4()
+        } else {
+            knightMove8()
+        }
+          x++;
+        }
+        if(yPosition>1 && xPosition<3 && x===count){
+          if(Math.floor(Math.random()*(2-1+1))===1){
+            knightMove2()
+        } else {
+            knightMove6()
+        }
+          x++;
+        }
+        if(yPosition>1 && xPosition>2 && x===count){
+          if(Math.floor(Math.random()*(2-1+1))===1){
+            knightMove3()
+        } else {
+            knightMove7()
+        }
+          x++;
+        }
+        sequence[count]=KEYPAD[yPosition][xPosition];
+        count++
+        }  
+    console.log(sequence);
 
-        sequence[i]=KEYPAD[yPosition][xPosition];
-      }
-
-
-
-
-
-
-      console.log(sequence);
     }
-
     KnightGame()
+    
   </script> 
 </html>
