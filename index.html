@@ -19,30 +19,33 @@
     let sequence = [];
     let yPosition;
     let xPosition;
-    let key;
 
+
+//Prompts user to enter a keyboard press and then tries to validate it.
     function getUserSelection(){
       let userSelection = window.prompt("Press A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, or 1,2,3: ");
       for (let y=0; y<5; y++){
         for (let x=0; x<5; x++){
           userSelection = userSelection.toUpperCase();
-          if (userSelection == KEYPAD[y][x]){
+          if (userSelection === KEYPAD[y][x]){
             const ARRAY_POSITION = [];
             ARRAY_POSITION[0]=y;
             ARRAY_POSITION[1]=x;
             return ARRAY_POSITION;
-          } else {
+          } else if (y===4 && x===4) {
             console.log("ERROR - Incorrect Value");
           }
         }
       }
     }
+//Counts the number of vowels in a sequence and returns the counted value.
     function countVowels(){
       let numberOfVowels = 0;
       console.log("Lets Count Vowels");
       for (let y=0; y<6; y++){
-        for (let x=0; x<11; x++){
+        for (let x=0; x<10; x++){
           if (VOWELS[y] === sequence[x]){
+            console.log("The vowel is "+ VOWELS[y])
             numberOfVowels++;
           }
         }
@@ -50,6 +53,7 @@
         console.log(numberOfVowels);
         return numberOfVowels;
     } 
+//Function for each valid Knight Move
     function knightMove1(){
       console.log("Move1");
       yPosition=yPosition+1;
@@ -98,7 +102,7 @@
       xPosition=xPosition-1;
       console.log("Knight to "+KEYPAD[yPosition][xPosition]);
     }
-
+//Main function
     function KnightGame(){
       let count = 0;
       for (let firstTime = 0; firstTime<1; firstTime++){
@@ -109,11 +113,10 @@
         console.log(yPosition +" "+ xPosition);
         console.log("Knight starts at "+KEYPAD[yPosition][xPosition]);
       }
-
       while (count<10){
         let x = count;
         if(yPosition<2 && xPosition<3 && x===count){
-          if(Math.floor(Math.random()*(2-1+1))===1){
+          if(Math.floor(Math.random()*(2-1+1))==1){
             knightMove1()
         } else {
             knightMove5()
@@ -121,7 +124,7 @@
           x++;
         }
         if(yPosition<2 && xPosition>2 && x===count){
-          if(Math.floor(Math.random()*(2-1+1))===1){
+          if(Math.floor(Math.random()*(2-1+1))==0){
             knightMove4()
         } else {
             knightMove8()
@@ -129,7 +132,7 @@
           x++;
         }
         if(yPosition>1 && xPosition<3 && x===count){
-          if(Math.floor(Math.random()*(2-1+1))===1){
+          if(Math.floor(Math.random()*(2-1+1))==1){
             knightMove2()
         } else {
             knightMove6()
@@ -137,7 +140,7 @@
           x++;
         }
         if(yPosition>1 && xPosition>2 && x===count){
-          if(Math.floor(Math.random()*(2-1+1))===1){
+          if(Math.floor(Math.random()*(2-1+1))==0){
             knightMove3()
         } else {
             knightMove7()
@@ -148,14 +151,12 @@
         count++
         if (count===10){
           let noVowels=countVowels()
-          if (noVowels>1 && count===10){
+          if (noVowels>2 && count===10){
             count=0;
           }
         }
-
       }  
     console.log(sequence);
-
     }
     KnightGame()
     
